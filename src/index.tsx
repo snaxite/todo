@@ -11,12 +11,13 @@ import promiseMiddleWare from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
 import Reducer from './store/reducers';
 
+// , window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleWare, ReduxThunk)(createStore);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={createStoreWithMiddleware(Reducer, window.__REDUX_DEVTOOLS_EXTENSION__
-      && window.__REDUX_DEVTOOLS_EXTENSION__())} >
+    <Provider store={createStoreWithMiddleware(Reducer)} >
       <App />
     </Provider>
   </React.StrictMode>,
