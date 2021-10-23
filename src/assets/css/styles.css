@@ -596,7 +596,7 @@ video {
   }
 }
 
-.btn{
+.btn {
   border-radius: 0.5rem;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
@@ -605,6 +605,15 @@ video {
   font-weight: 600;
   --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.badge {
+  border-radius: 9999px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  font-weight: 700;
 }
 
 .sr-only {

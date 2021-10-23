@@ -6,7 +6,7 @@ type layout = {
 
 function Layout({ children }: layout): JSX.Element {
     return (
-        <main id="main">
+        <main id="main" className="md:mx-10 sm:mx-2 my-10">
             {children}
         </main>
     )
