@@ -1,40 +1,44 @@
-import { Button } from "@mui/material";
 import TableList from "../components/TableList";
 import ButtonGroup from "../components/ButtonGroup";
-import { GrAdd } from "react-icons/all";
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
+import { useSelector } from 'react-redux';
+import AddModal from "../components/TableList/AddModal";
+import { task } from "../store/actions/task";
 
 export default function TodoList(): JSX.Element {
 
-    const data = [
-        {
-            id: 1,
-            task: 'do it with mamad',
-            status: 'paused',
-            date: '12 October, 2020',
-            time: '12:00 am',
-        }
-    ]
-
+    const tasks = useSelector((state: any) => state.taskReducer.tasks) || [];
     const buttonGroupItems = [
         {
             title: 'Month',
-            action: () => {}
         },
         {
             title: 'Week',
-            action: () => {}
         },
         {
             title: 'Day',
-            action: () => {}
         },
     ]
 
     return (
         <>
-            <Button variant="contained" color="primary" className="text-gray-50 py-2 capitalize"><GrAdd />&nbsp;Add Task</Button>
-            <ButtonGroup items={buttonGroupItems} />
-            <TableList data={data} />
+            <AddModal />
+            <Tabs>
+                <TabList>
+                    <Tab>To Do</Tab>
+                    <Tab>Done Tasks</Tab>
+                </TabList>
+                <TabPanel>
+                    <ButtonGroup items={buttonGroupItems} />
+                    <TableList data={tasks.filter((ta: task) => ta.status !== 'Done')} />
+                </TabPanel>
+                <TabPanel>
+                    <ButtonGroup items={buttonGroupItems} />
+                    <TableList data={tasks.filter((ta: task) => ta.status === 'Done')} />
+                </TabPanel>
+            </Tabs>
         </>
     )
 }
+
