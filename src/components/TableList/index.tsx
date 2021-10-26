@@ -2,6 +2,7 @@ import Badge from "../Badge";
 import { IoClose, GoPencil, TiTick } from "react-icons/all";
 import moment from "moment";
 import { task } from "../../store/actions/task";
+import DeleteModal from "./DeleteModal";
 
 type tableInputs = {
     data: Array<task>;
@@ -31,9 +32,7 @@ export default function Index({ data }: tableInputs): JSX.Element {
                                 <span className="p-2 text-blue-500 text-2xl hover:bg-blue-100 rounded-full">
                                     <GoPencil />
                                 </span>
-                                <span className="p-2 text-red-500 ml-4 text-3xl hover:bg-red-100 rounded-full" >
-                                    <IoClose />
-                                </span>
+                                <DeleteModal id={item.id} />
                                 {item.status !== 'Done' &&
                                     <span className="p-2 text-green-500 ml-4 text-3xl hover:bg-green-100 rounded-full" >
                                         <TiTick />

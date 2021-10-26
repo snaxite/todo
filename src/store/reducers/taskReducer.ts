@@ -4,6 +4,7 @@ import {
     REMOVE_TASK,
     SELECT_TASK,
     SET_FILTER,
+    task,
 } from "../actions/task";
 
 const initialState = {
@@ -20,8 +21,10 @@ type reducerInputs = {
 }
 
 export default function taskReducer(state = initialState, { type, payload }: reducerInputs) {
+    let temp: any, index: any;
     switch (type) {
         case ADD_TASK:
+            payload.id = state.id;
             state.id++;
             return {
                 ...state,
@@ -31,8 +34,15 @@ export default function taskReducer(state = initialState, { type, payload }: red
 
             break;
         case REMOVE_TASK:
-
-            break;
+            temp = state.tasks;
+            index = temp.map((task: task) => {
+                return task.id
+            }).indexOf(payload);
+            temp.splice(index, 1)
+            return {
+                ...state,
+                tasks: temp,
+            }
         case SELECT_TASK:
 
             break;

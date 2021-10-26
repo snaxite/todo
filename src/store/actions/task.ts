@@ -5,6 +5,7 @@ export const SELECT_TASK: string = 'SELECT_TASK';
 export const SET_FILTER: string = 'SET_FILTER';
 
 export type task = {
+    id: number;
     title: string;
     status: string;
     date: Date;
@@ -23,11 +24,11 @@ export const addTask = (task: task) => async (dispatch: any) => {
     }
 }
 
-export const removeTask = (id: string) => async (dispatch: any) => {
+export const removeTask = (id: number) => async (dispatch: any) => {
     try {
         dispatch({
             type: REMOVE_TASK,
-            payload: { id }
+            payload: id
         })
     } catch (error) {
         console.error(error)
