@@ -1,10 +1,11 @@
 import Badge from "../Badge";
 import { IoClose, GoPencil, TiTick } from "react-icons/all";
+import moment from "moment";
 
 type tableInputs = {
     data: Array<{
         id: number;
-        task: string;
+        title: string;
         status: string;
         date: string;
         time: string;
@@ -23,13 +24,13 @@ export default function Index({ data }: tableInputs): JSX.Element {
                 <th className="w-2/12 text-left"></th>
             </thead>
             <tbody>
-                {data.map((item, key) => (
+                {data.length !== 0 ? data.map((item, key) => (
                     <tr key={key} className="font-bold text-gray-600 border-b h-24">
                         <td className="flex flex-row justify-center"><input className="mt-9" type="checkbox" /></td>
-                        <td><span>{item['task']}</span></td>
-                        <td><Badge label={item['status']} variant={item['status'] === 'paused' ? 'warning' : 'info'} /></td>
-                        <td><span>{item['date']}</span></td>
-                        <td><span>{item['time']}</span></td>
+                        <td><span>{item['title']}</span></td>
+                        <td><Badge label={item['status']} variant={item['status'] === 'Paused' ? 'warning' : item['status'] === 'In Progress' ? 'info' : 'success'} /></td>
+                        <td><span>{moment(item['date']).format('DD MMMM yyyy')}</span></td>
+                        <td><span className="lowercase">{moment(item['date']).format('hh:mm A')}</span></td>
                         <td>
                             <span className="flex flex-row justify-center">
                                 <span className="p-2 text-blue-500 text-2xl hover:bg-blue-100 rounded-full">
@@ -38,13 +39,18 @@ export default function Index({ data }: tableInputs): JSX.Element {
                                 <span className="p-2 text-red-500 ml-4 text-3xl hover:bg-red-100 rounded-full" >
                                     <IoClose />
                                 </span>
-                                <span className="p-2 text-green-500 ml-4 text-3xl hover:bg-green-100 rounded-full" >
-                                    <TiTick />
-                                </span>
+                                {item.status !== 'Done' &&
+                                    <span className="p-2 text-green-500 ml-4 text-3xl hover:bg-green-100 rounded-full" >
+                                        <TiTick />
+                                    </span>
+                                }
                             </span>
                         </td>
                     </tr>
-                ))}
+                ))
+                    :
+                    <h5 className="text-center my-4 text-gray-700">No task found</h5>
+                }
             </tbody>
         </table>
     )

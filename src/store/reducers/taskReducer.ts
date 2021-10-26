@@ -7,28 +7,26 @@ import {
 } from "../actions/task";
 
 const initialState = {
-    doneIds: [],
-    inProgressIds: [],
-    filter: 'day',
+    id: 0,
+    tasks: [],
+    filter: 'Day',
     selected: [],
-    newTask: {
-        title: '',
-        state: '',
-        date: new Date(),
-        time: new Date(),
-    },
+    loading: false,
 }
 
 type reducerInputs = {
     type: string;
-    payload: Object;
+    payload: any;
 }
 
 export default function taskReducer(state = initialState, { type, payload }: reducerInputs) {
     switch (type) {
         case ADD_TASK:
-
-            break;
+            state.id++;
+            return {
+                ...state,
+                tasks: [...state.tasks, payload]
+            }
         case EDIT_TASK:
 
             break;
@@ -39,8 +37,10 @@ export default function taskReducer(state = initialState, { type, payload }: red
 
             break;
         case SET_FILTER:
-
-            break;
+            return {
+                ...state,
+                filter: payload
+            }
         default:
             return state;
     }

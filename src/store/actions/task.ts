@@ -4,30 +4,65 @@ export const EDIT_TASK: string = 'EDIT_TASK';
 export const SELECT_TASK: string = 'SELECT_TASK';
 export const SET_FILTER: string = 'SET_FILTER';
 
-type task = {
+export type task = {
     title: string;
-    state: 'in progress' | 'paused' | 'done';
+    status: string;
     date: Date;
-    time: Date;
-    selected: boolean;
+    time?: Date;
+    selected?: boolean;
 }
 
-export function addTask(task: task): void {
-
+export const addTask = (task: task) => async (dispatch: any) => {
+    try {
+        dispatch({
+            type: ADD_TASK,
+            payload: task
+        })
+    } catch (error) {
+        console.error(error)
+    }
 }
 
-export function removeTask(id: string): void {
-
+export const removeTask = (id: string) => async (dispatch: any) => {
+    try {
+        dispatch({
+            type: REMOVE_TASK,
+            payload: { id }
+        })
+    } catch (error) {
+        console.error(error)
+    }
 }
 
-export function editTask(task: task): void {
-
+export const editTask = (task: task) => async (dispatch: any) => {
+    try {
+        dispatch({
+            type: EDIT_TASK,
+            payload: { task }
+        })
+    } catch (error) {
+        console.error(error);
+    }
 }
 
-export function selectTask(id: string): void {
-
+export const selectTask = (id: string) => async (dispatch: any) => {
+    try {
+        dispatch({
+            type: SELECT_TASK,
+            payload: { id }
+        })
+    } catch (error) {
+        console.error(error)
+    }
 }
 
-export function setFilter(filter: string): void {
-
+export const setFilter = (filter: string) => async (dispatch: any) => {
+    try {
+        dispatch({
+            type: SET_FILTER,
+            payload: filter,
+        })
+    } catch (error) {
+        console.error(error)
+    }
 }
