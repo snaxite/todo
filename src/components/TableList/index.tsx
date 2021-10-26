@@ -1,15 +1,10 @@
 import Badge from "../Badge";
 import { IoClose, GoPencil, TiTick } from "react-icons/all";
 import moment from "moment";
+import { task } from "../../store/actions/task";
 
 type tableInputs = {
-    data: Array<{
-        id: number;
-        title: string;
-        status: string;
-        date: string;
-        time: string;
-    }>;
+    data: Array<task>;
 }
 
 export default function Index({ data }: tableInputs): JSX.Element {

@@ -2,6 +2,7 @@ import { Modal, Box, Typography, Button, InputLabel, TextField, Select, MenuItem
 import { useState } from "react";
 import { AiOutlinePlus } from "react-icons/all";
 import { useDispatch } from 'react-redux';
+import { toast } from "react-toastify";
 import { addTask } from "../../store/actions/task";
 
 export default function AddModal() {
@@ -25,13 +26,25 @@ export default function AddModal() {
     }
 
     function handleAdd(): void {
-        dispatch(addTask(task))
-        setTask({
-            title: '',
-            status: '',
-            date: new Date(),
-        })
-        handleClose();
+        if (task.title && task.status && task.date) {
+            dispatch(addTask(task))
+            setTask({
+                title: '',
+                status: '',
+                date: new Date(),
+            })
+            handleClose();
+        } else {
+            toast.error('Fill all fields.', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+            });
+        }
     }
 
     function handleForm(event: any): void {
