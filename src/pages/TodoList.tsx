@@ -44,7 +44,7 @@ export default function TodoList(): JSX.Element {
     return (
         <>
             <AddModal />
-            <Tabs>
+            <Tabs className="pt-4">
                 <TabList>
                     <Tab>To Do</Tab>
                     <Tab>Done Tasks</Tab>
