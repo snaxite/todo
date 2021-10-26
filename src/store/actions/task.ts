@@ -39,7 +39,7 @@ export const editTask = (task: task) => async (dispatch: any) => {
     try {
         dispatch({
             type: EDIT_TASK,
-            payload: { task }
+            payload: task
         })
     } catch (error) {
         console.error(error);

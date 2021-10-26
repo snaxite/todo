@@ -31,8 +31,15 @@ export default function taskReducer(state = initialState, { type, payload }: red
                 tasks: [...state.tasks, payload]
             }
         case EDIT_TASK:
-
-            break;
+            temp = state.tasks;
+            index = temp.map((task: task) => {
+                return task.id
+            }).indexOf(payload.id);
+            temp[index] = payload;
+            return {
+                ...state,
+                tasks: temp
+            }
         case REMOVE_TASK:
             temp = state.tasks;
             index = temp.map((task: task) => {
