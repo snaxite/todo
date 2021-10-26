@@ -1,0 +1,8 @@
+li.react-tabs__tab--selected {
+    color: #1976D2 !important;
+}
+
+li.react-tabs__tab {
+    font-weight: 500;
+    color      : #9E9E9E;
+}
