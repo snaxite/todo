@@ -1,16 +1,21 @@
 import Badge from "../Badge";
 import { TiTick } from "react-icons/all";
 import moment from "moment";
-import { task } from "../../store/actions/task";
+import { selectTask, task } from "../../store/actions/task";
 import DeleteModal from "./DeleteModal";
 import EditModal from "./EditModal";
 import { Checkbox } from "@mui/material";
+import { useDispatch } from 'react-redux';
 
 type tableInputs = {
     data: Array<task>;
 }
 
 export default function Index({ data }: tableInputs): JSX.Element {
+    const dispatch = useDispatch()
+    function markAsDone(id: number): void {
+        dispatch(selectTask(id));
+    }
     return (
         <table className="w-full">
             <thead className="text-gray-400 font-semibold border-t border-b">
@@ -36,7 +41,7 @@ export default function Index({ data }: tableInputs): JSX.Element {
                                 <EditModal task={item} />
                                 <DeleteModal id={item.id} />
                                 {item.status !== 'Done' &&
-                                    <span className="p-2 text-green-500 ml-4 text-3xl hover:bg-green-100 rounded-full" >
+                                    <span className="p-2 text-green-500 ml-4 text-3xl hover:bg-green-100 rounded-full cursor-pointer" onClick={() => markAsDone(item.id)}>
                                         <TiTick />
                                     </span>
                                 }

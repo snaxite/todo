@@ -46,11 +46,11 @@ export const editTask = (task: task) => async (dispatch: any) => {
     }
 }
 
-export const selectTask = (id: string) => async (dispatch: any) => {
+export const selectTask = (id: number) => async (dispatch: any) => {
     try {
         dispatch({
             type: SELECT_TASK,
-            payload: { id }
+            payload: id
         })
     } catch (error) {
         console.error(error)

@@ -51,8 +51,13 @@ export default function taskReducer(state = initialState, { type, payload }: red
                 tasks: temp,
             }
         case SELECT_TASK:
-
-            break;
+            temp = state.tasks;
+            index = state.tasks.findIndex((t: task) => t.id === payload);
+            temp[index] = { ...temp[index], status: 'Done' }
+            return {
+                ...state,
+                tasks: temp
+            }
         case SET_FILTER:
             return {
                 ...state,
