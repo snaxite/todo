@@ -4,6 +4,7 @@ import moment from "moment";
 import { task } from "../../store/actions/task";
 import DeleteModal from "./DeleteModal";
 import EditModal from "./EditModal";
+import { Checkbox } from "@mui/material";
 
 type tableInputs = {
     data: Array<task>;
@@ -23,7 +24,9 @@ export default function Index({ data }: tableInputs): JSX.Element {
             <tbody>
                 {data.length !== 0 ? data.map((item, key) => (
                     <tr key={key} className="font-bold text-gray-600 border-b h-24">
-                        <td className="flex flex-row justify-center"><input className="mt-9" type="checkbox" /></td>
+                        <td>
+                            <Checkbox />
+                        </td>
                         <td><span>{item['title']}</span></td>
                         <td><Badge label={item['status']} variant={item['status'] === 'Paused' ? 'warning' : item['status'] === 'In Progress' ? 'info' : 'success'} /></td>
                         <td><span>{moment(item['date']).format('DD MMMM yyyy')}</span></td>
