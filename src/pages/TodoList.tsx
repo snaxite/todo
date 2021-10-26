@@ -10,6 +10,7 @@ import moment from "moment";
 export default function TodoList(): JSX.Element {
     const filter: string = useSelector((state: any) => state.taskReducer.filter);
     const tasks: Array<task> = useSelector((state: any) => state.taskReducer.tasks) || [];
+
     const buttonGroupItems = [
         {
             title: 'Month',
