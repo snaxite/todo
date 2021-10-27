@@ -3,7 +3,7 @@ import { useState } from "react";
 import { GoPencil, GrClose } from "react-icons/all";
 import { useDispatch } from 'react-redux';
 import { toast } from "react-toastify";
-import { addTask, editTask } from "../../store/actions/task";
+import { editTask } from "../../store/actions/task";
 import { task } from "../../store/actions/task";
 
 const style: Object = {
@@ -20,7 +20,7 @@ const style: Object = {
     pb: 3,
 };
 
-export default function EditModal({ task }: { task: task }) {
+export default function EditModal({ task }: { task: task }): JSX.Element {
 
     const [data, setData] = useState({
         id: task.id,

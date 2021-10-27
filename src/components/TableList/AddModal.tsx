@@ -19,7 +19,7 @@ const style: Object = {
     pb: 3,
 };
 
-export default function AddModal() {
+export default function AddModal(): JSX.Element {
 
     const [task, setTask] = useState({
         id: 0,

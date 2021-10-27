@@ -5,7 +5,7 @@ import { IoClose, GrClose } from "react-icons/all";
 import { useDispatch } from "react-redux";
 import { removeTask } from "../../store/actions/task";
 
-export default function DeleteModal({ id }: { id: number }) {
+export default function DeleteModal({ id }: { id: number }): JSX.Element {
 
     const dispatch = useDispatch()
 
