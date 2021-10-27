@@ -40,7 +40,7 @@ export default function Index({ data }: tableInputs): JSX.Element {
                             <td>
                                 <span className="flex flex-row justify-center">
                                     <EditModal task={item} />
-                                    <DeleteModal id={item.id} />
+                                    <DeleteModal id={item.id} title={item.title} />
                                     {item.status !== 'Done' &&
                                         <span className="p-2 text-green-500 ml-4 text-3xl hover:bg-green-100 rounded-full cursor-pointer" onClick={() => markAsDone(item.id)}>
                                             <TiTick />

@@ -5,7 +5,7 @@ import { IoClose, GrClose } from "react-icons/all";
 import { useDispatch } from "react-redux";
 import { removeTask } from "../../store/actions/task";
 
-export default function DeleteModal({ id }: { id: number }): JSX.Element {
+export default function DeleteModal({ id, title }: { id: number, title?: string }): JSX.Element {
 
     const dispatch = useDispatch()
 
@@ -56,7 +56,10 @@ export default function DeleteModal({ id }: { id: number }): JSX.Element {
                             </Typography>
                             <IconButton onClick={toggleOpen}><GrClose /></IconButton>
                         </div>
-                        <div className="mt-16">
+                        <Typography variant="body2" className="text-gray-600 my-8">
+                            {title}
+                        </Typography>
+                        <div className="mt-8">
                             <Button variant="contained" color="primary" onClick={handleDelete}>
                                 <span className="capitalize">Delete</span>
                             </Button>
