@@ -83,7 +83,7 @@ export default function EditModal({ task }: { task: task }): JSX.Element {
                     <div className="mt-4">
                         <div className="my-3">
                             <InputLabel className="mb-2">Task title</InputLabel>
-                            <TextField required value={data.title} onChange={handleForm} type="text" name="title" fullWidth variant="outlined" label="Title" />
+                            <TextField multiline required value={data.title} onChange={handleForm} type="text" name="title" fullWidth variant="outlined" label="Title" />
                         </div>
                         <div className="my-3">
                             <InputLabel className="mb-2">Task status</InputLabel>

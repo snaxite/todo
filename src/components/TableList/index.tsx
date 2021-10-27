@@ -52,9 +52,11 @@ export default function Index({ data }: tableInputs): JSX.Element {
                     ))}
                 </tbody>
             </table>
-            <div>
-                <h5 className="text-center mt-16 text-gray-700 font-bold">No task found :D</h5>
-            </div>
+            {data.length === 0 &&
+                <div>
+                    <h5 className="text-center mt-16 text-gray-700 font-bold">No task found :D</h5>
+                </div>
+            }
         </>
     )
 }
