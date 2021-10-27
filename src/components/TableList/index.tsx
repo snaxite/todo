@@ -1,11 +1,12 @@
 import Badge from "../Badge";
-import { TiTick } from "react-icons/all";
+import { TiTick, IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/all";
 import moment from "moment";
 import { selectTask, task } from "../../store/actions/task";
 import DeleteModal from "./DeleteModal";
 import EditModal from "./EditModal";
 import { Checkbox } from "@mui/material";
 import { useDispatch } from 'react-redux';
+import { useState } from "react";
 
 type tableInputs = {
     data: Array<task>;
@@ -16,11 +17,17 @@ export default function Index({ data }: tableInputs): JSX.Element {
     function markAsDone(id: number): void {
         dispatch(selectTask(id));
     }
+    const [dir, setDir] = useState(false);
+    function toggleSort() {
+        setDir(!dir);
+    }
     return (
         <>
             <table className="w-full">
-                <thead className="text-gray-400 font-semibold border-t border-b">
-                    <th className="py-5 w-1/12 text-left"></th>
+                <thead className="text-gray-400 font-semibold border-t border-b select-none">
+                    <th className="py-3 w-1/12 text-left" onClick={toggleSort}>
+                        {dir ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
+                    </th>
                     <th className="w-3/12 text-left">Tasks</th>
                     <th className="w-2/12 text-left">Status</th>
                     <th className="w-2/12 text-left">Date</th>
