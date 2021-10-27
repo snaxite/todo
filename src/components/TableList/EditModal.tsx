@@ -1,4 +1,5 @@
 import { Modal, Box, Typography, Button, InputLabel, TextField, Select, MenuItem, IconButton } from "@mui/material";
+import moment from "moment";
 import { useState } from "react";
 import { GoPencil, GrClose } from "react-icons/all";
 import { useDispatch } from 'react-redux';
@@ -95,7 +96,7 @@ export default function EditModal({ task }: { task: task }): JSX.Element {
                         </div>
                         <div className="my-3">
                             <InputLabel className="mb-2">Date/Time</InputLabel>
-                            <TextField required value={data.date} onChange={handleForm} name="date" variant="outlined" type="datetime-local" fullWidth />
+                            <TextField required value={moment(data.date).format('yyyy-MM-DDThh:mm')} onChange={handleForm} name="date" variant="outlined" type="datetime-local" fullWidth />
                         </div>
                     </div>
                     <Button variant="contained" color="primary" onClick={handleEdit}>
