@@ -1,5 +1,5 @@
 import Badge from "../Badge";
-import { TiTick, IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/all";
+import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/all";
 import moment from "moment";
 import { selectTask, task } from "../../store/actions/task";
 import DeleteModal from "./DeleteModal";
@@ -14,8 +14,8 @@ type tableInputs = {
 
 export default function Index({ data }: tableInputs): JSX.Element {
     const dispatch = useDispatch()
-    function markAsDone(id: number): void {
-        dispatch(selectTask(id));
+    function handleCheckbox(e: React.ChangeEvent<HTMLInputElement>): void {
+        dispatch(selectTask(parseInt(e.target.value)));
     }
     const [dir, setDir] = useState(false);
     function toggleSort() {
@@ -40,21 +40,16 @@ export default function Index({ data }: tableInputs): JSX.Element {
                     {data.map((item, key) => (
                         <tr key={key} className="font-bold text-gray-600 border-b h-24">
                             <td>
-                                <Checkbox />
+                                <Checkbox checked={item.status === 'Done'} value={item.id} onChange={handleCheckbox} />
                             </td>
                             <td><span>{item['title']}</span></td>
-                            <td><Badge label={item['status']} variant={item['status'] === 'Paused' ? 'warning' : item['status'] === 'In Progress' ? 'info' : 'success'} /></td>
+                            <td><Badge label={item['status']} variant={item.status === 'Paused' ? 'warning' : 'info'} /></td>
                             <td><span>{moment(item['date']).format('DD MMMM yyyy')}</span></td>
                             <td><span className="lowercase">{moment(item['date']).format('hh:mm A')}</span></td>
                             <td>
                                 <span className="flex flex-row justify-center">
                                     <EditModal task={item} />
                                     <DeleteModal id={item.id} title={item.title} />
-                                    {item.status !== 'Done' &&
-                                        <span className="p-2 text-green-500 ml-4 text-3xl hover:bg-green-100 rounded-full cursor-pointer" onClick={() => markAsDone(item.id)}>
-                                            <TiTick />
-                                        </span>
-                                    }
                                 </span>
                             </td>
                         </tr>
