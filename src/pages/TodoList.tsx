@@ -13,7 +13,7 @@ export default function TodoList(): JSX.Element {
     const tasks: Array<task> = useSelector((state: any) => state.taskReducer.tasks) || [];
 
     function isRelevant(): Array<task> {
-        const res: Array<task> = []
+        let res: Array<task> = []
         if (filter === 'Day') {
             for (let t of tasks) {
                 if (moment().diff(t.date, 'days') === 0) res.push(t);
@@ -22,10 +22,12 @@ export default function TodoList(): JSX.Element {
             for (let t of tasks) {
                 if (moment().diff(t.date, 'weeks') === 0) res.push(t);
             }
-        } else {
+        } else if (filter === 'Month') {
             for (let t of tasks) {
                 if (moment().diff(t.date, 'months') === 0) res.push(t);
             }
+        } else {
+            res = tasks;
         }
         return res;
     }

@@ -61,7 +61,7 @@ export default function taskReducer(state = initialState, { type, payload }: red
         case SET_FILTER:
             return {
                 ...state,
-                filter: payload
+                filter: payload === state.filter ? '' : payload,
             }
         default:
             return state;
