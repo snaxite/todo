@@ -41,7 +41,6 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "lint": "eslint --ext .js,.tsx src test/unit",
     "build": "react-scripts build && postcss src/assets/css/tailwind.css -o src/assets/css/styles.css",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
