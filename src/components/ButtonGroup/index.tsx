@@ -7,10 +7,20 @@ type item = {
 }
 
 type input = {
-    items: Array<item>;
+    items?: Array<item>;
 }
 
-export default function Index({ items }: input): JSX.Element {
+export default function Index({ items = [
+    {
+        title: 'Month',
+    },
+    {
+        title: 'Week',
+    },
+    {
+        title: 'Day',
+    },
+] }: input): JSX.Element {
     const dispatch = useDispatch()
     function clickHandler(title: string): void {
         dispatch(setFilter(title));

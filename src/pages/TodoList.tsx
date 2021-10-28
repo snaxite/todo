@@ -6,22 +6,11 @@ import { useSelector } from 'react-redux';
 import AddModal from "../components/TableList/AddModal";
 import { task } from "../store/actions/task";
 import moment from "moment";
+import { useMemo } from "react";
 
 export default function TodoList(): JSX.Element {
     const filter: string = useSelector((state: any) => state.taskReducer.filter);
     const tasks: Array<task> = useSelector((state: any) => state.taskReducer.tasks) || [];
-
-    const buttonGroupItems = [
-        {
-            title: 'Month',
-        },
-        {
-            title: 'Week',
-        },
-        {
-            title: 'Day',
-        },
-    ]
 
     function isRelevant(): Array<task> {
         const res: Array<task> = []
@@ -41,20 +30,28 @@ export default function TodoList(): JSX.Element {
         return res;
     }
 
+    const addButtonMemo = useMemo(() => {
+        return <AddModal />
+    }, []);
+
+    const filtersMemo = useMemo(() => {
+        return <ButtonGroup />;
+    }, [])
+
     return (
         <>
-            <AddModal />
+            {addButtonMemo}
             <Tabs className="pt-4">
                 <TabList>
                     <Tab>To Do</Tab>
                     <Tab>Done Tasks</Tab>
                 </TabList>
                 <TabPanel>
-                    <ButtonGroup items={buttonGroupItems} />
+                    {filtersMemo}
                     <TableList data={isRelevant().filter((ta: task) => ta.status !== 'Done')} />
                 </TabPanel>
                 <TabPanel>
-                    <ButtonGroup items={buttonGroupItems} />
+                    {filtersMemo}
                     <TableList data={isRelevant().filter((ta: task) => ta.status === 'Done')} />
                 </TabPanel>
             </Tabs>
