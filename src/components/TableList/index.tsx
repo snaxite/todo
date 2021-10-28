@@ -25,14 +25,16 @@ export default function Index({ data }: tableInputs): JSX.Element {
         <>
             <table className="w-full">
                 <thead className="text-gray-400 font-semibold border-t border-b select-none">
-                    <th className="py-3 w-1/12 text-left" onClick={toggleSort}>
-                        {dir ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
-                    </th>
-                    <th className="w-3/12 text-left">Tasks</th>
-                    <th className="w-2/12 text-left">Status</th>
-                    <th className="w-2/12 text-left">Date</th>
-                    <th className="w-1/12 text-left">Time</th>
-                    <th className="w-2/12 text-left"></th>
+                    <tr>
+                        <th className="py-3 w-1/12 text-left" onClick={toggleSort}>
+                            {dir ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
+                        </th>
+                        <th className="w-3/12 text-left">Tasks</th>
+                        <th className="w-2/12 text-left">Status</th>
+                        <th className="w-2/12 text-left">Date</th>
+                        <th className="w-1/12 text-left">Time</th>
+                        <th className="w-2/12 text-left"></th>
+                    </tr>
                 </thead>
                 <tbody>
                     {data.map((item, key) => (
