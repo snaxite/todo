@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import Badge from "../Badge";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/all";
 import moment from "moment";
@@ -5,21 +6,53 @@ import { selectTask, task } from "../../store/actions/task";
 import DeleteModal from "./DeleteModal";
 import EditModal from "./EditModal";
 import { Checkbox } from "@mui/material";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from "react";
 
 type tableInputs = {
-    data: Array<task>;
+    type?: string;
 }
 
-export default function Index({ data }: tableInputs): JSX.Element {
+export default function Index({ type }: tableInputs): JSX.Element {
     const dispatch = useDispatch()
+    const [state, setState] = useState(true)
     function handleCheckbox(e: React.ChangeEvent<HTMLInputElement>): void {
         dispatch(selectTask(parseInt(e.target.value)));
+        setState(!state);
     }
     const [dir, setDir] = useState(false);
     function toggleSort() {
         setDir(!dir);
+    }
+    const filter: string = useSelector((state: any) => state.taskReducer.filter);
+    let tasks: Array<task> = useSelector((state: any) => state.taskReducer.tasks) || [];
+
+    tasks = tasks.filter(t => {
+        if (type === 'Done' && t.status === 'Done') {
+            return t;
+        } else if (!type && t.status !== 'Done') {
+            return t;
+        }
+    })
+
+    function isRelevant(): Array<task> {
+        let res: Array<task> = []
+        if (filter === 'Day') {
+            for (let t of tasks) {
+                if (moment().diff(t.date, 'days') === 0) res.push(t);
+            }
+        } else if (filter === 'Week') {
+            for (let t of tasks) {
+                if (moment().diff(t.date, 'weeks') === 0) res.push(t);
+            }
+        } else if (filter === 'Month') {
+            for (let t of tasks) {
+                if (moment().diff(t.date, 'months') === 0) res.push(t);
+            }
+        } else {
+            res = tasks;
+        }
+        return res;
     }
     return (
         <>
@@ -37,7 +70,7 @@ export default function Index({ data }: tableInputs): JSX.Element {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((item, key) => (
+                    {isRelevant().map((item, key) => (
                         <tr key={key} className="font-bold text-gray-600 border-b h-24">
                             <td>
                                 <Checkbox checked={item.status === 'Done'} value={item.id} onChange={handleCheckbox} />
@@ -56,7 +89,7 @@ export default function Index({ data }: tableInputs): JSX.Element {
                     ))}
                 </tbody>
             </table>
-            {data.length === 0 &&
+            {isRelevant().length === 0 &&
                 <div>
                     <h5 className="text-center mt-16 text-gray-700 font-bold">No task found :D</h5>
                 </div>
