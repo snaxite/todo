@@ -21,7 +21,7 @@ const style: Object = {
     pb: 3,
 };
 
-export default function EditModal({ task }: { task: task }): JSX.Element {
+export default function EditModal({ task, stateUpdater }: { task: task, stateUpdater: Function }): JSX.Element {
 
     const [data, setData] = useState({
         id: task.id,
@@ -45,6 +45,7 @@ export default function EditModal({ task }: { task: task }): JSX.Element {
     function handleEdit(): void {
         if (data.title && data.status && data.date) {
             dispatch(editTask(data))
+            stateUpdater();
             handleClose();
         } else {
             toast.error('Fill all fields.', {

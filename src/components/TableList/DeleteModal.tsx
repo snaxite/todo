@@ -5,7 +5,7 @@ import { IoClose, GrClose } from "react-icons/all";
 import { useDispatch } from "react-redux";
 import { removeTask } from "../../store/actions/task";
 
-export default function DeleteModal({ id, title }: { id: number, title?: string }): JSX.Element {
+export default function DeleteModal({ id, title, stateUpdater }: { id: number, title?: string, stateUpdater: Function }): JSX.Element {
 
     const dispatch = useDispatch()
 
@@ -17,6 +17,7 @@ export default function DeleteModal({ id, title }: { id: number, title?: string 
 
     function handleDelete() {
         dispatch(removeTask(id))
+        stateUpdater();
         toggleOpen();
     }
 

@@ -18,7 +18,7 @@ export default function Index({ type }: tableInputs): JSX.Element {
     const [state, setState] = useState(true)
     function handleCheckbox(e: React.ChangeEvent<HTMLInputElement>): void {
         dispatch(selectTask(parseInt(e.target.value)));
-        setState(!state);
+        updateStates();
     }
     const [dir, setDir] = useState(false);
     function toggleSort() {
@@ -34,6 +34,10 @@ export default function Index({ type }: tableInputs): JSX.Element {
             return t;
         }
     })
+
+    function updateStates() {
+        setState(!state);
+    }
 
     function isRelevant(): Array<task> {
         let res: Array<task> = []
@@ -86,8 +90,8 @@ export default function Index({ type }: tableInputs): JSX.Element {
                             <td><span className="lowercase">{moment(item['date']).format('hh:mm A')}</span></td>
                             <td>
                                 <span className="flex flex-row justify-center">
-                                    <EditModal task={item} />
-                                    <DeleteModal id={item.id} title={item.title} />
+                                    <EditModal task={item} stateUpdater={updateStates} />
+                                    <DeleteModal id={item.id} title={item.title} stateUpdater={updateStates} />
                                 </span>
                             </td>
                         </tr>
