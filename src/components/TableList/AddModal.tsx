@@ -1,6 +1,6 @@
 import { Modal, Box, Typography, Button, InputLabel, TextField, Select, MenuItem, IconButton } from "@mui/material";
 import moment from "moment";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { AiOutlinePlus, GrClose } from "react-icons/all";
 import { useDispatch } from 'react-redux';
 import { toast } from "react-toastify";
@@ -68,6 +68,17 @@ export default function AddModal(): JSX.Element {
         setTask({ ...task, [event.target.name]: event.target.value });
     }
 
+    const titleMemo = useMemo(function () {
+        return (
+            <div className="flex flex-row justify-between items-center">
+                <Typography variant="h5" component="h2">
+                    Add Task
+                </Typography>
+                <IconButton onClick={handleClose}><GrClose /></IconButton>
+            </div>
+        )
+    }, [])
+
     return (
         <>
             <Button variant="contained" color="primary" className="text-gray-50 py-2 capitalize float-right" onClick={handleOpen}>
@@ -80,12 +91,7 @@ export default function AddModal(): JSX.Element {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <div className="flex flex-row justify-between items-center">
-                        <Typography variant="h5" component="h2">
-                            Add Task
-                        </Typography>
-                        <IconButton onClick={handleClose}><GrClose /></IconButton>
-                    </div>
+                    {titleMemo}
                     <div className="mt-4">
                         <div className="my-3">
                             <InputLabel className="mb-2">Task title</InputLabel>

@@ -1,6 +1,6 @@
 import { Modal, Box, Typography, Button, InputLabel, TextField, Select, MenuItem, IconButton } from "@mui/material";
 import moment from "moment";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { GoPencil, GrClose } from "react-icons/all";
 import { useDispatch } from 'react-redux';
 import { toast } from "react-toastify";
@@ -63,6 +63,17 @@ export default function EditModal({ task }: { task: task }): JSX.Element {
         setData({ ...data, [event.target.name]: event.target.value });
     }
 
+    const titleMemo = useMemo(function () {
+        return (
+            <div className="flex flex-row justify-between items-center">
+                <Typography variant="h5" component="h2">
+                    Edit Task
+                </Typography>
+                <IconButton onClick={handleClose}><GrClose /></IconButton>
+            </div>
+        )
+    }, []);
+
     return (
         <>
             <span className="p-2 text-blue-500 text-2xl hover:bg-blue-100 rounded-full cursor-pointer" onClick={handleOpen}>
@@ -75,12 +86,7 @@ export default function EditModal({ task }: { task: task }): JSX.Element {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <div className="flex flex-row justify-between items-center">
-                        <Typography variant="h5" component="h2">
-                            Edit Task
-                        </Typography>
-                        <IconButton onClick={handleClose}><GrClose /></IconButton>
-                    </div>
+                    {titleMemo}
                     <div className="mt-4">
                         <div className="my-3">
                             <InputLabel className="mb-2">Task title</InputLabel>
