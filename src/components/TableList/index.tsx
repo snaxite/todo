@@ -60,7 +60,7 @@ export default function Index({ type }: tableInputs): JSX.Element {
                 <thead className="text-gray-400 font-semibold border-t border-b select-none">
                     <tr>
                         <th className="py-3 w-1/12 text-left" onClick={toggleSort}>
-                            {dir ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
+                            {!dir ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
                         </th>
                         <th className="w-3/12 text-left">Tasks</th>
                         <th className="w-2/12 text-left">Status</th>
@@ -70,7 +70,12 @@ export default function Index({ type }: tableInputs): JSX.Element {
                     </tr>
                 </thead>
                 <tbody>
-                    {isRelevant().map((item, key) => (
+                    {isRelevant().sort((a, b) => {
+                        if (dir) {
+                            return a.title > b.title ? 1 : -1;
+                        }
+                        return a.title <= b.title ? 1 : -1;
+                    }).map((item, key) => (
                         <tr key={key} className="font-bold text-gray-600 border-b h-24">
                             <td>
                                 <Checkbox checked={item.status === 'Done'} value={item.id} onChange={handleCheckbox} />
