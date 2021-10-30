@@ -46,6 +46,10 @@ export const editTask = (task: task) => async (dispatch: any) => {
     }
 }
 
+export function () {
+    return null;
+}
+
 export const selectTask = (id: number) => async (dispatch: any) => {
     try {
         dispatch({
