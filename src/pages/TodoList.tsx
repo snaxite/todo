@@ -19,7 +19,7 @@ export default function TodoList(): JSX.Element {
       {addButtonMemo}
       <Tabs className="pt-4">
         <TabList>
-          <Tab>To Do</Tab>
+          <Tab>to do</Tab>
           <Tab>Done Tasks</Tab>
         </TabList>
         <TabPanel>
