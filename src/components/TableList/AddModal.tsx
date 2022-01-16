@@ -37,7 +37,12 @@ const style: Object = {
 };
 
 export default function AddModal(): JSX.Element {
-  const [task, setTask] = useState({
+  const [task, setTask] = useState<{
+    id: number;
+    title: string;
+    status: string;
+    date: Date;
+  }>({
     id: 0,
     title: '',
     status: 'In Progress',
