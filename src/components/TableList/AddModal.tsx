@@ -41,11 +41,13 @@ export default function AddModal(): JSX.Element {
     id: number;
     title: string;
     status: string;
+    description: string;
     date: Date;
   }>({
     id: 0,
     title: '',
-    status: 'In Progress',
+    status: 'To do',
+    description: '',
     date: new Date(),
   });
 
@@ -67,7 +69,8 @@ export default function AddModal(): JSX.Element {
       setTask({
         id: 0,
         title: '',
-        status: 'In Progress',
+        status: 'To do',
+        description: '',
         date: new Date(),
       });
       handleClose();
@@ -141,6 +144,20 @@ export default function AddModal(): JSX.Element {
               />
             </div>
             <div className="my-3">
+              <InputLabel className="mb-2">Task description</InputLabel>
+              <TextField
+                multiline
+                required
+                value={task.description}
+                onChange={handleForm}
+                type="text"
+                name="description"
+                fullWidth
+                variant="outlined"
+                label="Description"
+              />
+            </div>
+            <div className="my-3">
               <InputLabel className="mb-2">Task status</InputLabel>
               <Select
                 required
@@ -150,9 +167,22 @@ export default function AddModal(): JSX.Element {
                 name="status"
                 variant="outlined"
               >
-                <MenuItem value="In Progress">In Progress</MenuItem>
-                <MenuItem value="Paused">Paused</MenuItem>
-                <MenuItem value="Done">Done</MenuItem>
+                <MenuItem value="To do">To do</MenuItem>
+                <MenuItem disabled value="In Progress">
+                  In Progress
+                </MenuItem>
+                <MenuItem disabled value="Blocked">
+                  Blocked
+                </MenuItem>
+                <MenuItem disabled value="In QA">
+                  In QA
+                </MenuItem>
+                <MenuItem disabled value="Done">
+                  Done
+                </MenuItem>
+                <MenuItem disabled value="Deployed">
+                  Deployed
+                </MenuItem>
               </Select>
             </div>
             <div className="my-3">

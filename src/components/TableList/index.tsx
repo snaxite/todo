@@ -32,9 +32,9 @@ export default function Index({ type }: TableInputs): JSX.Element {
     useSelector((state: any) => state.taskReducer.tasks) || [];
 
   tasks = tasks.filter((t) => {
-    if (type === 'Done' && t.status === 'Done') {
+    if (type === 'Done' && (t.status === 'Done' || t.status === 'Deployed')) {
       return t;
-    } else if (!type && t.status !== 'Done') {
+    } else if (!type && t.status !== 'Done' && t.status !== 'Deployed') {
       return t;
     }
   });

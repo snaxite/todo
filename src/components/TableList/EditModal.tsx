@@ -48,6 +48,7 @@ export default function EditModal({
   const [data, setData] = useState({
     id: task.id,
     title: task.title,
+    description: task.description,
     status: task.status,
     date: task.date,
   });
@@ -143,9 +144,54 @@ export default function EditModal({
                 name="status"
                 variant="outlined"
               >
-                <MenuItem value="In Progress">In Progress</MenuItem>
-                <MenuItem value="Paused">Paused</MenuItem>
-                <MenuItem value="Done">Done</MenuItem>
+                <MenuItem
+                  disabled={
+                    task.status !== 'Blocked' &&
+                    task.status !== 'In QA' &&
+                    task.status !== 'To do'
+                  }
+                  value="To do"
+                >
+                  To do
+                </MenuItem>
+                <MenuItem
+                  disabled={
+                    task.status !== 'To do' && task.status !== 'In Progress'
+                  }
+                  value="In Progress"
+                >
+                  In Progress
+                </MenuItem>
+                <MenuItem
+                  disabled={
+                    task.status !== 'In Progress' && task.status !== 'Blocked'
+                  }
+                  value="Blocked"
+                >
+                  Blocked
+                </MenuItem>
+                <MenuItem
+                  disabled={
+                    task.status !== 'In Progress' && task.status !== 'In QA'
+                  }
+                  value="In QA"
+                >
+                  In QA
+                </MenuItem>
+                <MenuItem
+                  disabled={task.status !== 'In QA' && task.status !== 'Done'}
+                  value="Done"
+                >
+                  Done
+                </MenuItem>
+                <MenuItem
+                  disabled={
+                    task.status !== 'Done' && task.status !== 'Deployed'
+                  }
+                  value="Deployed"
+                >
+                  Deployed
+                </MenuItem>
               </Select>
             </div>
             <div className="my-3">

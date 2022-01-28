@@ -10,6 +10,7 @@ export const SET_FILTER = 'SET_FILTER';
 export type TaskType = {
   id: number;
   title: string;
+  description: string;
   status: string;
   date: Date;
   time?: Date;
